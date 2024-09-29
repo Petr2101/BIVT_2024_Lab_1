@@ -103,11 +103,16 @@ public class Program
 
         // code here
         double s = 0;
+        double a = 1;
         if (x != 0)
         {
             for (double i = 1; i <= 9; i++)
             {
-                s += Math.Cos(i * x) / Math.Pow(x, i - 1);
+                if (i > 1)
+                {
+                    a *= x;
+                }
+                s += Math.Cos(i * x) / a;
             }
         }
         else
@@ -167,14 +172,12 @@ public class Program
 
         // code here;
         int s = 0;
+        int f = 1;
+
         for (int i = 1; i <= 6; i++)
         {
-            int a = 1;
-            for (int j = 1; j <= i; j++)
-            {
-                a *= j;
-            }
-            s += a;
+            f *= i; 
+            s += f; 
         }
         answer = s;
         // end
@@ -187,14 +190,13 @@ public class Program
 
         // code here;
         double s = 0;
+        double f = 1;
+        double a = 1;
         for (int i = 1; i <= 6; i++)
         {
-            int a = 1;
-            for (int j = 1; j <= i; j++)
-            {
-                a *= i;
-            }
-            s += Math.Pow(-1, i) * Math.Pow(5, i) / a;
+            f *= i;
+            a *= 5;
+            s += (i % 2 == 0 ? 1 : -1) * (a / f);
         }
         answer = Math.Round(s, 2);
         // end
@@ -235,12 +237,14 @@ public class Program
         double answer = 0;
 
         // code here
-        double s = 0;
-        for (int i = 0; i <= 10; i++)
+        double s = 1;
+        double a = 1;
+        for (int i = 1; i <= 10; i++)
         {
-            s += 1 / Math.Pow(x, i);
+            a /= (x != 0 ? x : 1);
+            s += a;
         }
-        Console.WriteLine(s);
+        s *= (x != 0 ? 1 : 0);
         answer = Math.Round(s, 2);
         // end
 
@@ -311,13 +315,20 @@ public class Program
 
         // code here
         double s = 0;
+        double a = 1;
         for (int i = 0; i <= 63; i++)
         {
-            s += Math.Pow(2, i);
+            s += a;
+            a *= 2;
         }
         s = s / 15;
         power = (int)Math.Floor(Math.Log10(s));
-        answer = Math.Round((s / Math.Pow(10, power)), 2);
+        double b = 1;
+        for (int i = 0; i < power; i++)
+        {
+            b *= 10;
+        }
+        answer = Math.Round((s / b), 2);
         // end
 
         return (answer, power);
@@ -387,10 +398,41 @@ public class Program
         int answer = 0;
 
         // code here
-        int n = 0;
-        for (double a, h, s = 0, p; s + a + n * h <= p; n++)
-            s += a + n * h;
-        answer = n;
+        double s = 0;
+        int c = 0;
+        while (true)
+        {
+            if (a < p)
+            {
+                if (h > 0)
+                {
+                    s += a + c * h;
+                    c++;
+                    if (s > p)
+                    {
+                        c--;
+                        break;
+                    }
+                }
+                else
+                {
+                    c = 0;
+                    break;
+                }
+            }
+            else if (a == p)
+            {
+                c = 1;
+                break;
+            }
+            else if (a > p)
+            {
+                c = 0;
+                break;
+            }
+        }
+
+        answer = c;
         // end
 
         return answer;
