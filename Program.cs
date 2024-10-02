@@ -303,7 +303,7 @@ public class Program
             c = d;
             c1 = d1;
         }
-        answer = c / c1;
+        answer = (double)c / c1;
         // end
 
         return answer;
@@ -387,11 +387,33 @@ public class Program
     {
         int answer = 0;
 
-        // code here
+        // Числители и знаменатели двух предыдущих членов последовательности
+        int num1 = 1, num2 = 2; // числители
+        int denom1 = 1, denom2 = 1; // знаменатели
 
-        // end
+        // Временные переменные для хранения текущего числителя и знаменателя
+        int currentNum = 0;
+        int currentDenom = 0;
 
+        // Вычисляем 3-й, 4-й и 5-й члены последовательности
+        for (int i = 3; i <= 5; i++)
+        {
+            currentNum = num1 + num2;
+            currentDenom = denom1 + denom2;
+
+            // Сдвигаем предыдущие значения для следующей итерации
+            num1 = num2;
+            denom1 = denom2;
+            num2 = currentNum;
+            denom2 = currentDenom;
+        }
+
+        // Ответ — это результат деления числителя на знаменатель 5-го члена
+        answer = currentNum / currentDenom;
+
+        // Возвращаем ответ
         return answer;
+
     }
     public int Task_2_3(double a, double h, double p)
     {
@@ -663,16 +685,15 @@ public class Program
         // code here
         S = -1;
         double a = 1;
+        double f = 1;   
+        double p = 1;
 
         for (int n = 0; Math.Abs(a) >= 0.0001; n++)
         {
-            double f = 1;
-            for (int i = 1; i <= 2 * n; i++)
-            {
-                f *= i;
-            }
             S += a;
-            a = Math.Pow(x, 2 * n) / f;
+            p *= x * x;
+            f *= (2 * n + 1) * (2 * n + 2);
+            a = p / f;
         }
         y = Math.Cosh(x);
         // end
