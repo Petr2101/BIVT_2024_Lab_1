@@ -685,16 +685,18 @@ public class Program
         // code here
         S = -1;
         double a = 1;
-        double f = 1;   
-        double p = 1;
+        double f = 1;
 
         for (int n = 0; Math.Abs(a) >= 0.0001; n++)
         {
+            if (n > 0)
+            {
+                f *= (2 * n - 1) * (2 * n);
+            }
             S += a;
-            p *= x * x;
-            f *= (2 * n + 1) * (2 * n + 2);
-            a = p / f;
+            a = x * x / f;
         }
+
         y = Math.Cosh(x);
         // end
 
