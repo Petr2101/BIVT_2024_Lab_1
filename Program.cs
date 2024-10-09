@@ -683,21 +683,23 @@ public class Program
         double S = 0, y = 0;
 
         // code here
-        S = -1;
-        double a = 1;
+        S = 1;
+        double a = -1;
         double f = 1;
+        double g = 1;
 
-        for (int n = 0; Math.Abs(a) >= 0.0001; n++)
+        for (int n = 1; Math.Abs(a) >= 0.0001; n++)
         {
+            g *= x * x;
             if (n > 0)
             {
                 f *= (2 * n - 1) * (2 * n);
             }
+            a = g / f;
             S += a;
-            a = x * x / f;
         }
-
-        y = Math.Cosh(x);
+        S = Math.Round(S, 4);
+        y = Math.Round(Math.Cosh(x), 4);
         // end
 
         return (S, y);
