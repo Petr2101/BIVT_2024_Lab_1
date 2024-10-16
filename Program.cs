@@ -680,15 +680,14 @@ public class Program
     }
     public (double, double) Task_3_7(double x)
     {
-        double S = 0, y = 0;
+        double S = 1, y = 0;
 
         // code here
-        S = 1;
         double a = -1;
         double f = 1;
         double g = 1;
 
-        for (int n = 1; Math.Abs(a) >= 0.0001; n++)
+        for (double n = 1; Math.Abs(a) >= 0.0001; n++)
         {
             g *= x * x;
             if (n > 0)
@@ -696,10 +695,12 @@ public class Program
                 f *= (2 * n - 1) * (2 * n);
             }
             a = g / f;
-            S += a;
+            if (Math.Abs(a)>=0.0001)
+            {
+                S += a;
+            }
         }
-        S = Math.Round(S, 4);
-        y = Math.Round(Math.Cosh(x), 4);
+        y = Math.Cosh(x);
         // end
 
         return (S, y);
